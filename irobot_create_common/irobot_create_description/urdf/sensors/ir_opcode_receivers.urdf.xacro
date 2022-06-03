@@ -3,7 +3,6 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:macro name="ir_opcode_receivers" params="name:=ir_omni
-                                                  gazebo
                                                   robot_model_name
                                                   dock_model_name
                                                   emitter_link_name
@@ -52,26 +51,6 @@
                       r_min="${min_range}" r_max="${sensor_1_range}" r_res="0.01">
                       <plugin name="dummy" filename="dummyfile"></plugin>
         </xacro:ray_sensor>
-      </gazebo>
-    </xacro:if>
-
-    <xacro:if value="${gazebo == 'classic'}">
-      <gazebo>
-        <plugin name="${name}_plugin" filename="libgazebo_ros_create_ir_opcode.so">
-          <ros>
-            <namespace>/</namespace>
-            <remapping>~/out:=ir_opcode</remapping>
-          </ros>
-          <update_rate>${update_rate}</update_rate>
-          <robot_model_name>${robot_model_name}</robot_model_name>
-          <receiver_link_name>${receiver_link_name}</receiver_link_name>
-          <dock_model_name>${dock_model_name}</dock_model_name>
-          <emitter_link_name>${emitter_link_name}</emitter_link_name>
-          <sensor_0_fov>${sensor_0_fov}</sensor_0_fov>
-          <sensor_0_range>${sensor_0_range}</sensor_0_range>
-          <sensor_1_fov>${sensor_1_fov}</sensor_1_fov>
-          <sensor_1_range>${sensor_1_range}</sensor_1_range>
-        </plugin>
       </gazebo>
     </xacro:if>
 

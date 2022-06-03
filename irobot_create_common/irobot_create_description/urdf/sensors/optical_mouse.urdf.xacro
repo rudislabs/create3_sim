@@ -12,19 +12,6 @@
     <link name="${name}">
       <xacro:inertial_dummy />
     </link>
-
-    <xacro:if value="${gazebo == 'classic'}">
-      <gazebo>
-        <plugin name="${name}_plugin" filename="libgazebo_ros_create_optical_mouse.so">
-            <ros>
-              <namespace>/</namespace>
-              <remapping>~/out:=${name}</remapping>
-            </ros>
-          <update_rate>${update_rate}</update_rate>
-          <link_name>${name}</link_name>
-        </plugin>
-      </gazebo>
-    </xacro:if>
     
     <gazebo reference="${name}_joint" >
       <preserveFixedJoint>true</preserveFixedJoint>

@@ -10,11 +10,8 @@ from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitut
 from launch_ros.actions import Node
 
 
-ARGUMENTS = [
-    DeclareLaunchArgument('gazebo', default_value='classic',
-                          choices=['classic', 'ignition'],
-                          description='Which gazebo simulation to use')
-]
+ARGUMENTS = []
+
 for pose_element in ['x', 'y', 'z', 'yaw']:
     ARGUMENTS.append(DeclareLaunchArgument(f'{pose_element}', default_value='0.0',
                      description=f'{pose_element} component of the dock pose.'))
@@ -36,8 +33,6 @@ def generate_launch_description():
     yaw = LaunchConfiguration('yaw')
     visualize_rays = LaunchConfiguration('visualize_rays')
 
-    gazebo_simulator = LaunchConfiguration('gazebo')
-
     state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -48,7 +43,6 @@ def generate_launch_description():
             {'robot_description':
              Command(
                 ['xacro', ' ', dock_xacro_file, ' ',
-                 'gazebo:=', gazebo_simulator, ' ',
                  'visualize_rays:=', visualize_rays])},
         ],
         remappings=[

@@ -45,21 +45,13 @@ functional, while the 4 remaining ones are created as dummy links. -->
     <maxVel>0.01</maxVel>
     <minDepth>0.001</minDepth>
     <maxContacts>10</maxContacts>
-    <material>Gazebo/DarkGrey</material>
+    <xacro:insert_block name="material_darkgray"/>
     <sensor name='${name}_contact_sensor' type='contact'>
       <always_on>true</always_on>
       <update_rate>${update_rate}</update_rate>
       <contact>
         <collision>${link_name}_collision</collision>
       </contact>
-      <xacro:if value="${gazebo == 'classic'}">
-        <plugin name="${name}_plugin" filename="libgazebo_ros_create_bumper.so">
-          <ros>
-            <namespace>/</namespace>
-            <remapping>~/out:=_internal/bumper/event</remapping>
-          </ros>
-        </plugin>
-      </xacro:if>
     </sensor>
   </gazebo>
 
